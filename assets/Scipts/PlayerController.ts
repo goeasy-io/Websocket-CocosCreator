@@ -4,7 +4,7 @@ import GoEasy from 'goeasy';
 
 const goEasy = GoEasy.getInstance({
     host: "hangzhou.goeasy.io",
-    appkey: "BC-1e46fd20681e42ccb085c22219c395bf",
+    appkey: "BC-xxx",
     modules: ['pubsub']
 });
 
