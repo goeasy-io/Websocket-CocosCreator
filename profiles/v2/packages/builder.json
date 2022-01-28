@@ -1,0 +1,16 @@
+{
+  "__version__": "1.2.6",
+  "version": {
+    "builder": "1.2.3"
+  },
+  "BuildTaskManager": {
+    "taskMap": {}
+  },
+  "common": {
+    "outputName": "android",
+    "mainBundleCompressionType": "merge_dep",
+    "platform": "android",
+    "name": "mind-your-step",
+    "md5Cache": true
+  }
+}

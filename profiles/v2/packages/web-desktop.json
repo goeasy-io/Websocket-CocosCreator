@@ -1,0 +1,14 @@
+{
+  "__version__": "1.0.0",
+  "options": {
+    "web-desktop": {
+      "resolution": {
+        "designWidth": 414,
+        "designHeight": 896
+      },
+      "polyfills": {
+        "asyncFunctions": true
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "buildTask": {
+    "web-desktop": {
+      "options": {
+        "buildPath": "./build",
+        "debug": false,
+        "embedWebDebugger": false,
+        "forceCombileEngine": true,
+        "md5Cache": false,
+        "name": "tutorial-mind-your-step-3d",
+        "platform": "web-desktop",
+        "resolution": {
+          "height": 640,
+          "width": 960
+        },
+        "scenes": [
+          {
+            "url": "db://assets/Scenes/Main.scene",
+            "uuid": "6962d389-b02c-41bc-937c-43c2f47d6fbc"
+          }
+        ],
+        "sourceMaps": false,
+        "startScene": "6962d389-b02c-41bc-937c-43c2f47d6fbc",
+        "taskName": "web-desktop"
+      },
+      "rate": 100,
+      "state": "success",
+      "subTask": {
+        "engine": "success",
+        "settings": "success",
+        "template": "success"
+      }
+    }
+  },
+  "platformQueue": {
+    "web-desktop": [],
+    "web-mobile": []
+  },
+  "BuildTaskManager": {
+    "queue": [
+      {
+        "id": "web-desktop_001",
+        "state": "success",
+        "progress": 1,
+        "options": {
+          "buildPath": "./build",
+          "compressTexture": true,
+          "debug": false,
+          "designResolution": {
+            "width": "1080",
+            "height": 640,
+            "fitWidth": true,
+            "fitHeight": false
+          },
+          "forceCombileEngine": true,
+          "includeModules": [
+            "base",
+            "gfx-webgl",
+            "gfx-webgl2",
+            "ui",
+            "particle",
+            "physics-cannon",
+            "physics-framework",
+            "audio",
+            "tween",
+            "terrain"
+          ],
+          "inlineSpriteFrames": false,
+          "md5Cache": false,
+          "mergeStartScene": false,
+          "name": "tutorial-mind-your-step",
+          "packAutoAtlas": true,
+          "platform": "web-desktop",
+          "resolution": {
+            "height": 640,
+            "width": 960
+          },
+          "scenes": [
+            {
+              "url": "db://assets/Scenes/Main.scene",
+              "uuid": "6962d389-b02c-41bc-937c-43c2f47d6fbc"
+            }
+          ],
+          "sourceMaps": false,
+          "startScene": "6962d389-b02c-41bc-937c-43c2f47d6fbc",
+          "taskName": "web-desktop_001",
+          "packages": {
+            "web-desktop": {
+              "designHeight": 640,
+              "designWidth": 1080
+            }
+          }
+        },
+        "message": "build sucess in 60542 ms!"
+      }
+    ]
+  },
+  "common": {
+    "name": "tutorial-mind-your-step",
+    "designWidth": 1080,
+    "designHeight": 640
+  },
+  "web-desktop": {
+    "web-desktop": {
+      "designWidth": 1080,
+      "designHeight": 640
+    }
+  },
+  "version": {
+    "alipay-mini-game": "1.0.4.1",
+    "baidu-mini-game": "1.0.4.1",
+    "cocos-play": "1.0.4.1",
+    "huawei-mini-game": "1.0.4.1",
+    "native": "1.0.4.1",
+    "oppo-mini-game": "1.0.4.1",
+    "vivo-mini-game": "1.0.4.1",
+    "web-desktop": "1.0.4.1",
+    "web-mobile": "1.0.4.1",
+    "wechatgame": "1.0.4.1",
+    "xiaomi-quick-game": "1.0.4.1"
+  }
+}
