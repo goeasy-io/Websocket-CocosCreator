@@ -7,16 +7,6 @@
     "sample": 30,
     "speed": 1,
     "wrapMode": 1,
-    "events": [],
-    "_duration": 0.3,
-    "_keys": [
-      [
-        0,
-        0.16666666666666666,
-        0.3
-      ]
-    ],
-    "_stepness": 0,
     "_curves": [
       {
         "modifiers": [
@@ -31,28 +21,40 @@
             {
               "__type__": "cc.Vec3",
               "x": 0,
-              "y": 0.5,
+              "y": 0,
               "z": 0
             },
             {
               "__type__": "cc.Vec3",
               "x": 0,
-              "y": 1.5,
+              "y": 1,
               "z": 0
             },
             {
               "__type__": "cc.Vec3",
               "x": 0,
-              "y": 0.5,
+              "y": 0,
               "z": 0
             }
           ],
-          "easingMethods": {}
+          "easingMethods": [
+            null,
+            null,
+            null
+          ]
         }
       }
     ],
-    "_commonTargets": [],
-    "_hash": 3604672431
+    "events": [],
+    "_duration": 0.3,
+    "_keys": [
+      [
+        0,
+        0.16666666666666666,
+        0.3
+      ]
+    ],
+    "_stepness": 0
   },
   {
     "__type__": "cc.animation.HierarchyPath",

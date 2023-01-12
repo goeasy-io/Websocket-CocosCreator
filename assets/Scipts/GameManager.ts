@@ -2,89 +2,38 @@ import { _decorator, Component, Prefab, instantiate, Node, Label, CCInteger, Vec
 import { PlayerController } from "./PlayerController";
 const { ccclass, property } = _decorator;
 
-enum BlockType {
+enum BlockType{
     BT_NONE,
     BT_STONE,
 };
 
-enum GameState {
+enum GameState{
     GS_INIT,
     GS_PLAYING,
-    GS_RESTART
+    GS_END,
 };
 
 @ccclass("GameManager")
 export class GameManager extends Component {
 
-    @property({ type: Prefab })
-    public cubePrfb: Prefab | null = null;
-    @property({ type: CCInteger })
+    @property({type: Prefab})
+    public cubePrfb: Prefab|null = null;
+    @property({type: CCInteger})
     public roadLength: Number = 50;
     private _road: BlockType[] = [];
-    @property({ type: Node })
-    public startMenu: Node | null = null;
-    @property({ type: PlayerController })
-    public playerCtrl: PlayerController | null = null;
-    @property({ type: Label })
-    public stepsLabel: Label | null = null;
+    @property({type: Node})
+    public startMenu: Node|null = null;
+    @property({type: PlayerController})
+    public playerCtrl: PlayerController|null = null;
+    @property({type: Label})
+    public stepsLabel: Label|null = null;
 
-    start() {
-        this.subscribe();
+    start () {
         this.curState = GameState.GS_INIT;
         this.playerCtrl?.node.on('JumpEnd', this.onPlayerJumpEnd, this);
     }
 
-    subscribe() {
-        window.goEasy.pubsub.subscribe({
-            channel: 'PlayerStatus',
-            onMessage: (message: any) => {
-                switch (message.content) {
-                    case 'RESTART':
-                        this.curState = GameState.GS_RESTART;
-                        break
-                    case 'PLAYING':
-                        this.curState = GameState.GS_PLAYING;
-                        break
-                }
-            },
-            onSuccess: () => {
-                // console.log("监听成功");
-            },
-            onFailed: (error: any) => {
-                console.log("订阅消息失败, code:" + error.code + ",错误信息:" + error.content);
-            }
-        })
-    }
-
-    sendMessage(status: String) {
-        //发送消息
-        let message = status;
-        window.goEasy.pubsub.publish({
-            channel: 'PlayerStatus',
-            message: message,
-            onSuccess: () => {
-                // console.log("发送成功");
-            },
-            onFailed: (error: any) => {
-                console.log("消息发送失败，错误编码：" + error.code + " 错误信息：" + error.content);
-            }
-        });
-    }
-
     init() {
-        if (this.startMenu) {
-            this.startMenu.active = false;
-        }
-
-        this.generateRoad();
-
-        if (this.playerCtrl) {
-            this.playerCtrl.node.setPosition(Vec3.ZERO);
-            this.playerCtrl.reset();
-        }
-    }
-
-    reStart() {
         if (this.startMenu) {
             this.startMenu.active = true;
         }
@@ -92,13 +41,14 @@ export class GameManager extends Component {
         this.generateRoad();
 
         if (this.playerCtrl) {
+            this.playerCtrl.setInputActive(false);
             this.playerCtrl.node.setPosition(Vec3.ZERO);
             this.playerCtrl.reset();
         }
     }
 
-    set curState(value: GameState) {
-        switch (value) {
+    set curState (value: GameState) {
+        switch(value) {
             case GameState.GS_INIT:
                 this.init();
                 break;
@@ -111,35 +61,46 @@ export class GameManager extends Component {
                     this.stepsLabel.string = '0';   // 将步数重置为0
                 }
 
+                setTimeout(() => {      //直接设置active会直接开始监听鼠标事件，做了一下延迟处理
+                    if (this.playerCtrl) {
+                        this.playerCtrl.setInputActive(true);
+                    }
+                }, 0.1);
                 break;
-            case GameState.GS_RESTART:
-                this.reStart();
+            case GameState.GS_END:
                 break;
         }
     }
 
     generateRoad() {
-        this._road = [
-            1, 0, 1, 1, 0, 1, 1, 1, 1, 0,
-            1, 0, 1, 0, 1, 0, 1, 1, 1, 1,
-            1, 0, 1, 0, 1, 1, 0, 1, 1, 0,
-            1, 1, 1, 1, 1, 0, 1, 1, 0, 1,
-            1, 1, 0, 1, 0, 1, 1, 1, 0, 1
-        ]
+
+        this.node.removeAllChildren();
+
+        this._road = [];
+        // startPos
+        this._road.push(BlockType.BT_STONE);
+
+        for (let i = 1; i < this.roadLength; i++) {
+            if (this._road[i-1] === BlockType.BT_NONE) {
+                this._road.push(BlockType.BT_STONE);
+            } else {
+                this._road.push(Math.floor(Math.random() * 2));
+            }
+        }
 
         let linkedBlocks = 0;
         for (let j = 0; j < this._road.length; j++) {
-            if (this._road[j]) {
+            if(this._road[j]) {
                 ++linkedBlocks;
             }
-            if (this._road[j] == 0) {
-                if (linkedBlocks > 0) {
+            if(this._road[j] == 0) {
+                if(linkedBlocks > 0) {
                     this.spawnBlockByCount(j - 1, linkedBlocks);
                     linkedBlocks = 0;
                 }
-            }
-            if (this._road.length == j + 1) {
-                if (linkedBlocks > 0) {
+            }        
+            if(this._road.length == j + 1) {
+                if(linkedBlocks > 0) {
                     this.spawnBlockByCount(j, linkedBlocks);
                     linkedBlocks = 0;
                 }
@@ -148,8 +109,8 @@ export class GameManager extends Component {
     }
 
     spawnBlockByCount(lastPos: number, count: number) {
-        let block: Node | null = this.spawnBlockByType(BlockType.BT_STONE);
-        if (block) {
+        let block: Node|null = this.spawnBlockByType(BlockType.BT_STONE);
+        if(block) {
             this.node.addChild(block);
             block?.setScale(count, 1, 1);
             block?.setPosition(lastPos - (count - 1) * 0.5, -1.5, 0);
@@ -161,8 +122,8 @@ export class GameManager extends Component {
             return null;
         }
 
-        let block: Node | null = null;
-        switch (type) {
+        let block: Node|null = null;
+        switch(type) {
             case BlockType.BT_STONE:
                 block = instantiate(this.cubePrfb);
                 break;
@@ -172,18 +133,16 @@ export class GameManager extends Component {
     }
 
     onStartButtonClicked() {
-        this.sendMessage('PLAYING');
+        this.curState = GameState.GS_PLAYING;
     }
 
     checkResult(moveIndex: number) {
         if (moveIndex < this.roadLength) {
-            if (this._road[moveIndex] == BlockType.BT_NONE) {
-                //跳到了空方块上
-                this.sendMessage('RESTART');
+            if (this._road[moveIndex] == BlockType.BT_NONE) {   //跳到了空方块上
+                this.curState = GameState.GS_INIT;
             }
-        } else {
-            // 跳过了最大长度
-            this.sendMessage('RESTART');
+        } else {    // 跳过了最大长度
+            this.curState = GameState.GS_INIT;
         }
     }
 
@@ -194,4 +153,7 @@ export class GameManager extends Component {
         this.checkResult(moveIndex);
     }
 
+    // update (deltaTime: number) {
+    //     // Your update function goes here.
+    // }
 }
