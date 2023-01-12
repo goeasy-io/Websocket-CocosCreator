@@ -2,5 +2,295 @@
   "__version__": "1.2.6",
   "version": {
     "builder": "1.2.3"
+  },
+  "BuildTaskManager": {
+    "taskMap": {
+      "1670912602287": {
+        "id": "1670912602287",
+        "progress": 1,
+        "state": "success",
+        "message": "Build success in 103314 ms!",
+        "options": {
+          "name": "mind-your-step",
+          "platform": "wechatgame",
+          "buildPath": "./build",
+          "debug": false,
+          "md5Cache": true,
+          "sourceMaps": false,
+          "replaceSplashScreen": false,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "6962d389-b02c-41bc-937c-43c2f47d6fbc",
+          "scenes": [
+            {
+              "url": "db://assets/Scenes/Main.scene",
+              "uuid": "6962d389-b02c-41bc-937c-43c2f47d6fbc"
+            }
+          ],
+          "outputName": "wechatgame",
+          "packages": {
+            "cocos-service": {
+              "configID": "c1d48e",
+              "services": []
+            },
+            "wechatgame": {
+              "startSceneAssetBundle": false,
+              "orientation": "portrait",
+              "appid": "wx5ba2cfe43f386d1a",
+              "separateEngine": false,
+              "wasm": "js"
+            }
+          }
+        },
+        "time": "2023-1-5 16:55",
+        "dirty": false,
+        "rawOptions": {
+          "name": "mind-your-step",
+          "platform": "wechatgame",
+          "buildPath": "./build",
+          "debug": false,
+          "md5Cache": true,
+          "sourceMaps": false,
+          "replaceSplashScreen": false,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "6962d389-b02c-41bc-937c-43c2f47d6fbc",
+          "scenes": [
+            {
+              "url": "db://assets/Scenes/Main.scene",
+              "uuid": "6962d389-b02c-41bc-937c-43c2f47d6fbc"
+            }
+          ],
+          "outputName": "wechatgame",
+          "packages": {
+            "cocos-service": {
+              "configID": "c1d48e",
+              "services": []
+            },
+            "wechatgame": {
+              "startSceneAssetBundle": false,
+              "orientation": "portrait",
+              "appid": "wx5ba2cfe43f386d1a",
+              "separateEngine": false,
+              "wasm": "js"
+            }
+          }
+        }
+      },
+      "1670919277875": {
+        "id": "1670919277875",
+        "progress": 1,
+        "state": "success",
+        "message": "Build success in 101094 ms!",
+        "options": {
+          "name": "mind-your-step",
+          "platform": "android",
+          "buildPath": "./build",
+          "debug": false,
+          "md5Cache": true,
+          "sourceMaps": false,
+          "replaceSplashScreen": false,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "6962d389-b02c-41bc-937c-43c2f47d6fbc",
+          "scenes": [
+            {
+              "url": "db://assets/Scenes/Main.scene",
+              "uuid": "6962d389-b02c-41bc-937c-43c2f47d6fbc"
+            }
+          ],
+          "outputName": "android",
+          "packages": {
+            "cocos-service": {
+              "configID": "c1d48e",
+              "services": []
+            },
+            "native": {
+              "template": "link",
+              "polyfills": {
+                "asyncFunctions": true
+              },
+              "encrypted": false,
+              "xxteaKey": "f3STsPRC5ArafTOp",
+              "compressZip": false,
+              "makeAfterBuild": false
+            },
+            "android": {
+              "packageName": "com.mindyourstep.android",
+              "orientation": {
+                "portrait": true,
+                "upsideDown": false,
+                "landscapeRight": false,
+                "landscapeLeft": false
+              },
+              "apiLevel": "android-26",
+              "appABIs": [],
+              "useDebugKeystore": true,
+              "keystorePath": "",
+              "keystorePassword": "",
+              "keystoreAlias": "",
+              "keystoreAliasPassword": "",
+              "appBundle": false,
+              "androidInstant": false,
+              "remoteUrl": "",
+              "sdkPath": "C:\\Users\\Think\\AppData\\Local\\Android\\Sdk",
+              "ndkPath": "C:\\Users\\Think\\AppData\\Local\\Android\\Sdk\\ndk-bundle",
+              "renderBackEnd": {
+                "vulkan": false,
+                "gles3": true,
+                "gles2": false
+              }
+            }
+          }
+        },
+        "time": "2023-1-12 18:03",
+        "dirty": false
+      },
+      "1673229719851": {
+        "id": "1673229719851",
+        "progress": 1,
+        "state": "success",
+        "message": "Build success in 45390 ms!",
+        "options": {
+          "name": "mind-your-step-h5",
+          "platform": "web-mobile",
+          "buildPath": "./build",
+          "debug": false,
+          "md5Cache": true,
+          "sourceMaps": false,
+          "replaceSplashScreen": false,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "6962d389-b02c-41bc-937c-43c2f47d6fbc",
+          "scenes": [
+            {
+              "url": "db://assets/Scenes/Main.scene",
+              "uuid": "6962d389-b02c-41bc-937c-43c2f47d6fbc"
+            }
+          ],
+          "outputName": "web-mobile",
+          "packages": {
+            "cocos-service": {
+              "configID": "c1d48e",
+              "services": []
+            },
+            "web-mobile": {
+              "orientation": "portrait",
+              "polyfills": {
+                "asyncFunctions": true
+              },
+              "embedWebDebugger": false
+            }
+          }
+        },
+        "time": "2023-1-9 11:16",
+        "dirty": false
+      },
+      "1673231756217": {
+        "id": "1673231756217",
+        "progress": 1,
+        "state": "success",
+        "message": "Build success in 47153 ms!",
+        "options": {
+          "name": "mind-your-step-h5",
+          "platform": "web-mobile",
+          "buildPath": "./build",
+          "debug": false,
+          "md5Cache": true,
+          "sourceMaps": false,
+          "replaceSplashScreen": false,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "6962d389-b02c-41bc-937c-43c2f47d6fbc",
+          "scenes": [
+            {
+              "url": "db://assets/Scenes/Main.scene",
+              "uuid": "6962d389-b02c-41bc-937c-43c2f47d6fbc"
+            }
+          ],
+          "outputName": "web-pc",
+          "packages": {
+            "cocos-service": {
+              "configID": "c1d48e",
+              "services": []
+            },
+            "web-mobile": {
+              "orientation": "landscape",
+              "polyfills": {
+                "asyncFunctions": true
+              },
+              "embedWebDebugger": false
+            }
+          }
+        },
+        "time": "2023-1-9 11:12",
+        "dirty": false
+      },
+      "undefined": {
+        "state": "failure",
+        "time": "Invalid Date Inval",
+        "dirty": false,
+        "rawOptions": {
+          "name": "mind-your-step-h5",
+          "platform": "web-mobile",
+          "buildPath": "./build",
+          "debug": false,
+          "md5Cache": true,
+          "sourceMaps": false,
+          "replaceSplashScreen": false,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "6962d389-b02c-41bc-937c-43c2f47d6fbc",
+          "scenes": [
+            {
+              "url": "db://assets/Scenes/Main.scene",
+              "uuid": "6962d389-b02c-41bc-937c-43c2f47d6fbc"
+            }
+          ],
+          "outputName": "web-mobile-001",
+          "packages": {
+            "cocos-service": {},
+            "web-mobile": {
+              "orientation": "landscape",
+              "polyfills": {
+                "asyncFunctions": true
+              },
+              "embedWebDebugger": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "common": {
+    "outputName": "android",
+    "mainBundleCompressionType": "merge_dep",
+    "platform": "web-mobile",
+    "name": "mind-your-step-h5",
+    "md5Cache": true
   }
 }

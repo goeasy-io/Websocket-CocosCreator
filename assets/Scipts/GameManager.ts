@@ -10,7 +10,7 @@ enum BlockType{
 enum GameState{
     GS_INIT,
     GS_PLAYING,
-    GS_END,
+    GS_RESTART
 };
 
 @ccclass("GameManager")
@@ -29,11 +29,62 @@ export class GameManager extends Component {
     public stepsLabel: Label|null = null;
 
     start () {
+        this.subscribe();
         this.curState = GameState.GS_INIT;
         this.playerCtrl?.node.on('JumpEnd', this.onPlayerJumpEnd, this);
     }
 
+    subscribe() {
+        window.goEasy.pubsub.subscribe({
+            channel: 'PlayerStatus',
+            onMessage: (message: any) => {
+                switch (message.content) {
+                    case 'RESTART':
+                        this.curState = GameState.GS_RESTART;
+                        break
+                    case 'PLAYING':
+                        this.curState = GameState.GS_PLAYING;
+                        break
+                }
+            },
+            onSuccess: () => {
+                // console.log("监听成功");
+            },
+            onFailed: (error: any) => {
+                console.log("订阅消息失败, code:" + error.code + ",错误信息:" + error.content);
+            }
+        })
+    }
+
+    sendMessage(status: String) {
+        //发送消息
+        let message = status;
+        window.goEasy.pubsub.publish({
+            channel: 'PlayerStatus',
+            message: message,
+            onSuccess: () => {
+                // console.log("发送成功");
+            },
+            onFailed: (error: any) => {
+                console.log("消息发送失败，错误编码：" + error.code + " 错误信息：" + error.content);
+            }
+        });
+    }
+
     init() {
+        if (this.startMenu) {
+            this.startMenu.active = false;
+        }
+
+        this.generateRoad();
+
+        if (this.playerCtrl) {
+            this.playerCtrl.node.setPosition(Vec3.ZERO);
+            this.playerCtrl.reset();
+        }
+    }
+
+    reStart() {
         if (this.startMenu) {
             this.startMenu.active = true;
         }
@@ -41,7 +92,6 @@ export class GameManager extends Component {
         this.generateRoad();
 
         if (this.playerCtrl) {
-            this.playerCtrl.setInputActive(false);
             this.playerCtrl.node.setPosition(Vec3.ZERO);
             this.playerCtrl.reset();
         }
@@ -61,32 +111,21 @@ export class GameManager extends Component {
                     this.stepsLabel.string = '0';   // 将步数重置为0
                 }
 
-                setTimeout(() => {      //直接设置active会直接开始监听鼠标事件，做了一下延迟处理
-                    if (this.playerCtrl) {
-                        this.playerCtrl.setInputActive(true);
-                    }
-                }, 0.1);
                 break;
-            case GameState.GS_END:
+            case GameState.GS_RESTART:
+                this.reStart();
                 break;
         }
     }
 
     generateRoad() {
-
-        this.node.removeAllChildren();
-
-        this._road = [];
-        // startPos
-        this._road.push(BlockType.BT_STONE);
-
-        for (let i = 1; i < this.roadLength; i++) {
-            if (this._road[i-1] === BlockType.BT_NONE) {
-                this._road.push(BlockType.BT_STONE);
-            } else {
-                this._road.push(Math.floor(Math.random() * 2));
-            }
-        }
+        this._road = [
+            1, 0, 1, 1, 0, 1, 1, 1, 1, 0,
+            1, 0, 1, 0, 1, 0, 1, 1, 1, 1,
+            1, 0, 1, 0, 1, 1, 0, 1, 1, 0,
+            1, 1, 1, 1, 1, 0, 1, 1, 0, 1,
+            1, 1, 0, 1, 0, 1, 1, 1, 0, 1
+        ]
 
         let linkedBlocks = 0;
         for (let j = 0; j < this._road.length; j++) {
@@ -98,7 +137,7 @@ export class GameManager extends Component {
                     this.spawnBlockByCount(j - 1, linkedBlocks);
                     linkedBlocks = 0;
                 }
-            }        
+            }
             if(this._road.length == j + 1) {
                 if(linkedBlocks > 0) {
                     this.spawnBlockByCount(j, linkedBlocks);
@@ -133,16 +172,18 @@ export class GameManager extends Component {
     }
 
     onStartButtonClicked() {
-        this.curState = GameState.GS_PLAYING;
+        this.sendMessage('PLAYING');
     }
 
     checkResult(moveIndex: number) {
         if (moveIndex < this.roadLength) {
-            if (this._road[moveIndex] == BlockType.BT_NONE) {   //跳到了空方块上
-                this.curState = GameState.GS_INIT;
+            if (this._road[moveIndex] == BlockType.BT_NONE) {
+                //跳到了空方块上
+                this.sendMessage('RESTART');
             }
-        } else {    // 跳过了最大长度
-            this.curState = GameState.GS_INIT;
+        } else {
+            // 跳过了最大长度
+            this.sendMessage('RESTART');
         }
     }
 
@@ -153,7 +194,4 @@ export class GameManager extends Component {
         this.checkResult(moveIndex);
     }
 
-    // update (deltaTime: number) {
-    //     // Your update function goes here.
-    // }
 }
