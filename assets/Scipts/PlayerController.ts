@@ -29,8 +29,6 @@ export class PlayerController extends Component {
 
     start () {
         goEasy.connect({
-            id: 'player',
-            data: {},
             onSuccess: () => {
                 console.log("GoEasy connect successfully.");
                 this.subscribe();
