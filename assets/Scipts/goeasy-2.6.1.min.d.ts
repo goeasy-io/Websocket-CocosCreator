@@ -35,7 +35,7 @@ export declare abstract class CallBackOptions {
 }
 export interface ConnectOptions extends CallBackOptions {
     id?: string | number;
-    data: string | any;
+    data?: string | any;
     otp?: string;
     wxmpId?: {
         appid: string;

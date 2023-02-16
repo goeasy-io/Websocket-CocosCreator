@@ -1,4 +1,4 @@
-import { _decorator, Component, Prefab, instantiate, Node, Label, CCInteger, Vec3 } from "cc";
+import { _decorator, Component, Prefab, systemEvent, SystemEventType, EventMouse, instantiate, Node, Label, CCInteger, Vec3 } from "cc";
 import { PlayerController } from "./PlayerController";
 const { ccclass, property } = _decorator;
 
@@ -32,6 +32,35 @@ export class GameManager extends Component {
         this.subscribe();
         this.curState = GameState.GS_INIT;
         this.playerCtrl?.node.on('JumpEnd', this.onPlayerJumpEnd, this);
+        // 使用函数绑定
+        // this.startMenu?.on(Node.EventType.MOUSE_DOWN, function ( event:any ) {
+        //     console.log('MOUSE_DOWN',event)
+        //     // this.enabled = false;
+        // }.bind(this));
+
+    }
+
+    onLoad() {
+        // console.log('onLoad')
+        // this.node.pauseSystemEvents(true);
+        systemEvent.on(SystemEventType.MOUSE_WHEEL, this.mouseWheel, this);
+        // systemEvent.off(SystemEventType.MOUSE_WHEEL, this.mouseWheel, this);
+    }
+
+    mouseWheel (event: any) {
+        // event.preventDefault()
+        event.stopPropagation()
+        // event.bubbles = true
+        // event.propagationStopped = true
+        // event.propagationImmediateStopped = true
+        // this.useCapture = true;
+
+        // this.node.pauseSystemEvents(true);
+        // console.log('SystemEventType  MOUSE_WHEEL',event);
+        // console.log('SystemEventType  this.node',this.node);
+        // this.node.dispatchEvent(event)
+        // return false;
+        // event.enabled = false;
     }
 
     subscribe() {

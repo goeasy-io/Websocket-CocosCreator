@@ -1,6 +1,6 @@
 import { _decorator, Component, Vec3, systemEvent, SystemEvent, EventMouse, Animation, SkeletalAnimation } from "cc";
 const { ccclass, property } = _decorator;
-import GoEasy from "./goeasy-2.5.15.min.js"
+import GoEasy from "./goeasy-2.6.1.min.js"
 
 const goEasy = GoEasy.getInstance({
     host: "hangzhou.goeasy.io",
