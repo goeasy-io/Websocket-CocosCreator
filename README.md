@@ -22,11 +22,6 @@
 * 使用Cocos Creator导入本项目
 * 下载编辑器Creator - 3.0.0，等待编辑器下载解压后，打开本项目
 
-#### 安装依赖
-```
-npm ci
-```
-
 #### 免费获取appkey
 1. 访问[GoEasy官网](https://www.goeasy.io)进行注册
 2. 登陆后，创建一个应用
